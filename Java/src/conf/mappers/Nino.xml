@@ -1,0 +1,534 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+	<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+	  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='bd.ibatis.mappers.NinoMapper'>
+
+	<resultMap type='Nino' id='NinoResultset'>
+		<constructor>
+			<arg javaType="java.lang.Integer" column="N_ID_NINO" />
+			<arg javaType="java.lang.String" column="N_USUARIO" />
+			<arg javaType="java.lang.String" column="N_NOMBRE" />
+			<arg javaType="java.lang.String" column="N_APELLIDOS" />
+			<arg javaType="java.lang.String" column="N_CONTRASENA" />
+			<arg javaType="java.lang.String" column="N_IDIOMA" />
+			<arg javaType="java.lang.String" column="N_IDIOMA_JUEGO" />
+			<arg javaType="java.util.Date" column="N_FECHA_NACIMIENTO" />
+			<arg javaType="java.lang.Integer" column="N_TELEFONO_1" />
+			<arg javaType="java.lang.Integer" column="N_TELEFONO_2" />
+		</constructor>
+
+		<result property="nombrePadre" javaType="java.lang.String"
+			column="N_NOMBRE_PADRE" />
+		<result property="nombreMadre" javaType="java.lang.String"
+			column="N_NOMBRE_MADRE" />
+		<result property="profesionPadre" javaType="java.lang.String"
+			column="N_PROFESION_PADRE" />
+		<result property="profesionMadre" javaType="java.lang.String"
+			column="N_PROFESION_MADRE" />
+		<result property="hermanosEdades" javaType="java.lang.String"
+			column="N_HERMANOS_EDADES" />
+		<result property="otrasConvivencias" javaType="java.lang.String"
+			column="N_OTRAS_CONVIVENCIAS" />
+		<result property="motivoConsulta" javaType="java.lang.String"
+			column="N_MOTIVO_CONSULTA" />
+		<result property="entrevistados" javaType="java.lang.String"
+			column="N_ENTREVISTADOS" />
+
+		<result property="embarazoParto" javaType="java.lang.String"
+			column="AN_EMBARAZO_PARTO" />
+		<result property="desFisico" javaType="java.lang.String"
+			column="AN_DES_FISICO" />
+		<result property="desMotor" javaType="java.lang.String" column="AN_DES_MOTOR" />
+		<result property="desOrofacial" javaType="java.lang.String"
+			column="AN_DES_OROFACIAL" />
+		<result property="desLenguaje" javaType="java.lang.String"
+			column="AN_DES_LENGUAJE" />
+		<result property="antecedentesFamiliares" javaType="java.lang.String"
+			column="AN_ANTECEDENTES_FAMILIARES" />
+		<result property="datosMedicos" javaType="java.lang.String"
+			column="AN_DATOS_MEDICOS" />
+		<result property="historialEscolar" javaType="java.lang.String"
+			column="AN_HISTORIA_ESCOLAR" />
+		<result property="atenFueraCentro" javaType="java.lang.String"
+			column="AN_ATEN_FUERA_CENTRO" />
+
+		<result property="tipoAlimentos" javaType="java.lang.String"
+			column="AN_TIPO_ALIMENTOS" />
+		<result property="alimentosPreferidos" javaType="java.lang.String"
+			column="AN_ALIMENTOS_PREFERIDOS" />
+		<result property="reconoceComer" javaType="java.lang.String"
+			column="AN_RECONOCE_COMER" />
+		<result property="pideAlimento" javaType="java.lang.String"
+			column="AN_PIDE_ALIMENTO" />
+		<result property="biberonChupete" javaType="java.lang.String"
+			column="AN_BIBERON_CHUPETE" />
+		<result property="mastica" javaType="java.lang.String" column="AN_MASTICA" />
+		<result property="succionaTraga" javaType="java.lang.String"
+			column="AN_SUCCIONA_TRAGA" />
+		<result property="muerdeCosas" javaType="java.lang.String"
+			column="AN_MUERDE_COSAS" />
+		<result property="saliva" javaType="java.lang.String" column="AN_SALIVA" />
+		<result property="horasSueno" javaType="java.lang.String"
+			column="AN_HORAS_SUENO" />
+		<result property="intencionDormir" javaType="java.lang.String"
+			column="AN_INTENCION_DORMIR" />
+		<result property="reconoceDormir" javaType="java.lang.String"
+			column="AN_RECONOCE_DORMIR" />
+		<result property="ronca" javaType="java.lang.String" column="AN_RONCA" />
+		<result property="controlEsfinteres" javaType="java.lang.String"
+			column="AN_CONTROL_ESFINTERES" />
+		<result property="avisaSucio" javaType="java.lang.String"
+			column="AN_AVISA_SUCIO" />
+		<result property="pideWC" javaType="java.lang.String" column="AN_PIDE_WC" />
+		<result property="reconoceRopa" javaType="java.lang.String"
+			column="AN_RECONOCE_ROPA" />
+		<result property="necesidadCambioRopa" javaType="java.lang.String"
+			column="AN_NECESIDAD_CAMBIO_ROPA" />
+		<result property="malestarSucio" javaType="java.lang.String"
+			column="AN_MALESTAR_SUCIO" />
+		<result property="sonarseNariz" javaType="java.lang.String"
+			column="AN_SONARSE_NARIZ" />
+
+		<result property="aCargo" javaType="java.lang.String" column="SN_A_CARGO" />
+		<result property="mayorApego" javaType="java.lang.String"
+			column="SN_MAYOR_APEGO" />
+		<result property="sinAtender" javaType="java.lang.String"
+			column="SN_SIN_ATENDER" />
+		<result property="reconoceFamiliares" javaType="java.lang.String"
+			column="SN_RECONOCE_FAMILIARES" />
+		<result property="comportamientoDesconocidos" javaType="java.lang.String"
+			column="SN_COMPORTAMIENTO_DESCONOCIDOS" />
+		<result property="juegaNinos" javaType="java.lang.String"
+			column="SN_JUEGO_NINOS" />
+		<result property="relacionNinos" javaType="java.lang.String"
+			column="SN_RELACION_NINOS" />
+		<result property="juegoFunional" javaType="java.lang.String"
+			column="SN_JUEGO_FUNCIONAL" />
+		<result property="imitaAcciones" javaType="java.lang.String"
+			column="SN_IMITA_ACCIONES" />
+		<result property="objetosPreferidos" javaType="java.lang.String"
+			column="SN_OBJETOS_PREFERIDOS" />
+		<result property="rechazaObjetos" javaType="java.lang.String"
+			column="SN_RECHAZA_OBJETO" />
+		<result property="juegaEnCasa" javaType="java.lang.String"
+			column="SN_JUEGA_EN_CASA" />
+		<result property="reconoceJuguetes" javaType="java.lang.String"
+			column="SN_RECONOCE_JUGUETE" />
+
+
+		<result property="intencionalidadComunicativa" javaType="java.lang.String"
+			column="LN_INTENCIONALIDAD_COMUNICATIVA" />
+		<result property="quienComunica" javaType="java.lang.String"
+			column="LN_QUIEN_COMUNICA" />
+		<result property="comoComunica" javaType="java.lang.String"
+			column="LN_COMO_COMUNICA" />
+		<result property="llamaAtencion" javaType="java.lang.String"
+			column="LN_LLAMA_ATENCION" />
+		<result property="intenaAtencion" javaType="java.lang.String"
+			column="LN_INTENTA_ATENCION" />
+		<result property="pideNecesita" javaType="java.lang.String"
+			column="LN_PIDE_NECESITA" />
+		<result property="gestoRechazo" javaType="java.lang.String"
+			column="LN_GESTO_RECHAZO" />
+		<result property="agrado" javaType="java.lang.String" column="LN_AGRADO" />
+		<result property="estadosEmocion" javaType="java.lang.String"
+			column="LN_ESTADOS_EMOCION" />
+		<result property="gestoAdios" javaType="java.lang.String"
+			column="LN_GESTO_ADIOS" />
+		<result property="ordenesSencillas" javaType="java.lang.String"
+			column="LN_ORDENES_SENCILLAS" />
+		<result property="ordenesComplejas" javaType="java.lang.String"
+			column="LN_ORDENES_COMPLEJAS" />
+		<result property="seEntiende" javaType="java.lang.String"
+			column="LN_SE_ENTIENDE" />			
+	</resultMap>
+	
+	<resultMap type='Sesion' id='SesionResultset'>
+		<constructor>
+			<arg javaType="java.lang.Integer" column="S_ID_NINO" />
+			<arg javaType="java.lang.Integer" column="S_ID_SESION" />
+			<arg javaType="java.lang.String" column="S_VER" />
+			<arg javaType="java.lang.String" column="S_COMENTARIO" />
+			<arg javaType="java.util.Date" column="S_FECHA" />
+		</constructor>
+	</resultMap>
+	
+	<resultMap type='HistorialMinijuegos' id='HistorialMinijuegosResultset'>
+		<constructor>
+			<arg javaType="java.lang.String" column="M_NOMBRE" />
+			<arg javaType="java.util.Date" column="HJ_FECHA" />
+			<arg javaType="java.lang.String" column="HJ_COMPLETO" />
+			<arg javaType="java.lang.Integer" column="HJ_VIDAS" />
+			<arg javaType="java.lang.Integer" column="HJ_ERRORES" />
+			<arg javaType="java.lang.Integer" column="HJ_TIEMPO" />
+		</constructor>
+	</resultMap>
+
+
+	<resultMap type='Map' id='LoginResultset'>
+		<result property='usuario' column='N_USUARIO' />
+		<result property='contrasena' column='N_CONTRASENA' />
+	</resultMap>
+
+	<select id='getNinos' resultMap='NinoResultset' parameterType='Map'>
+		SELECT N_ID_NINO, N_USUARIO, N_NOMBRE, N_APELLIDOS, N_CONTRASENA, 
+		N_IDIOMA, N_IDIOMA_JUEGO, N_FECHA_NACIMIENTO,
+		N_TELEFONO_1, N_TELEFONO_2,
+		N_NOMBRE_PADRE, N_NOMBRE_MADRE, N_PROFESION_PADRE, N_PROFESION_MADRE,
+		N_HERMANOS_EDADES, N_OTRAS_CONVIVENCIAS, N_MOTIVO_CONSULTA,
+		N_ENTREVISTADOS,
+
+		AN_EMBARAZO_PARTO,
+		AN_DES_FISICO, AN_DES_MOTOR, AN_DES_OROFACIAL, AN_DES_LENGUAJE,
+		AN_ANTECEDENTES_FAMILIARES, AN_DATOS_MEDICOS, AN_HISTORIA_ESCOLAR,
+		AN_ATEN_FUERA_CENTRO,
+
+		AN_TIPO_ALIMENTOS, AN_ALIMENTOS_PREFERIDOS,
+		AN_RECONOCE_COMER, AN_PIDE_ALIMENTO,
+		AN_BIBERON_CHUPETE, AN_MASTICA,
+		AN_SUCCIONA_TRAGA, AN_MUERDE_COSAS,
+		AN_SALIVA, AN_HORAS_SUENO,
+		AN_INTENCION_DORMIR, AN_RECONOCE_DORMIR,
+		AN_RONCA,
+		AN_CONTROL_ESFINTERES, AN_AVISA_SUCIO, AN_PIDE_WC,
+		AN_RECONOCE_ROPA,
+		AN_NECESIDAD_CAMBIO_ROPA, AN_MALESTAR_SUCIO,
+		AN_SONARSE_NARIZ,
+
+		SN_A_CARGO, SN_MAYOR_APEGO, SN_SIN_ATENDER, SN_RECONOCE_FAMILIARES,
+		SN_COMPORTAMIENTO_DESCONOCIDOS, SN_JUEGO_NINOS, SN_RELACION_NINOS,
+		SN_JUEGO_FUNCIONAL, SN_IMITA_ACCIONES,
+		SN_OBJETOS_PREFERIDOS,
+		SN_RECHAZA_OBJETO, SN_JUEGA_EN_CASA, SN_RECONOCE_JUGUETE,
+
+		LN_INTENCIONALIDAD_COMUNICATIVA, LN_QUIEN_COMUNICA, LN_COMO_COMUNICA,
+		LN_LLAMA_ATENCION, LN_INTENTA_ATENCION, LN_PIDE_NECESITA,
+		LN_GESTO_RECHAZO, LN_AGRADO, LN_ESTADOS_EMOCION,
+		LN_GESTO_ADIOS,
+		LN_ORDENES_SENCILLAS, LN_ORDENES_COMPLEJAS, LN_SE_ENTIENDE		
+		
+		FROM NINO
+		LEFT JOIN
+		ANAMNESIS_NINO AN ON N_ID_NINO=AN.AN_ID_NINO
+		LEFT JOIN
+		AUTONOMIA_NINO AU ON
+		N_ID_NINO=AU.AN_ID_NINO
+		LEFT JOIN SOCIALIZACION_NINO ON
+		N_ID_NINO=SN_ID_NINO
+		LEFT JOIN LENGUAJE_NINO ON N_ID_NINO=LN_ID_NINO
+		<where>
+			<if test="usuario != null and contrasena != null">
+					N_USUARIO = #{usuario}
+					AND N_CONTRASENA = #{contrasena}
+			</if>
+			<if test="idNino != null">
+				N_ID_NINO = #{idNino} 
+			</if>
+		</where>
+	</select>
+	
+	<select id="getSesiones" resultMap='SesionResultset' parameterType='Nino'>
+		SELECT S_ID_NINO, S_ID_SESION, S_VER, S_COMENTARIO, S_FECHA
+		FROM SESION_NINO
+		WHERE S_ID_NINO = #{idUsuario}
+		ORDER BY S_FECHA DESC
+	</select>
+	
+	<select id="getHistorialMinijuegos" resultMap='HistorialMinijuegosResultset' parameterType='Nino'>
+		SELECT M_NOMBRE, HJ_FECHA, HJ_COMPLETO, HJ_VIDAS, HJ_ERRORES, HJ_TIEMPO
+		FROM HISTORIAL_JUEGO
+			INNER JOIN MINIJUEGO ON HJ_ID_MINIJUEGO = M_ID_MINIJUEGO
+		WHERE HJ_ID_NINO = #{idUsuario} 
+		ORDER BY HJ_FECHA DESC
+	</select>
+	
+	<select id="existeIdNino" resultType="int" parameterType='String'>
+		SELECT COUNT(1)
+		FROM NINO
+		<where>
+			N_ID_NINO = #{idNino}
+		</where>
+	</select>
+
+	<insert id='insertNino' parameterType='Nino'>
+		<selectKey keyProperty="idUsuario" resultType="int" order="BEFORE">
+			<if test="idUsuario == null">
+				SELECT IFNULL(MAX(N_ID_NINO),0)+1 FROM NINO
+			</if>
+			<if test="idUsuario != null">SELECT #{idUsuario}</if>
+		</selectKey>
+		INSERT INTO NINO
+		(N_ID_NINO, N_USUARIO, N_NOMBRE, N_APELLIDOS,
+		N_CONTRASENA,
+		N_IDIOMA, N_IDIOMA_JUEGO, N_FECHA_NACIMIENTO,
+		N_TELEFONO_1, N_TELEFONO_2,
+		N_NOMBRE_PADRE, N_NOMBRE_MADRE,
+		N_PROFESION_PADRE, N_PROFESION_MADRE,
+		N_HERMANOS_EDADES,
+		N_OTRAS_CONVIVENCIAS, N_MOTIVO_CONSULTA,N_ENTREVISTADOS)
+		VALUES
+		(#{idUsuario}, #{usuario}, #{nombre},
+		#{apellidos},#{contrasena},
+		#{idioma},
+		#{idiomaJuego},#{fechaNacimiento},
+		#{telefono1},#{telefono2},
+		#{nombrePadre},#{nombreMadre}, #{profesionPadre},#{profesionMadre},
+		#{hermanosEdades}, #{otrasConvivencias}, #{motivoConsulta},
+		#{entrevistados})
+	</insert>
+
+	<insert id='insertNinoAnamnesis' parameterType='Nino'>
+		INSERT INTO
+		ANAMNESIS_NINO
+		(AN_ID_NINO, AN_EMBARAZO_PARTO, AN_DES_FISICO,
+		AN_DES_MOTOR, AN_DES_OROFACIAL, AN_DES_LENGUAJE,
+		AN_ANTECEDENTES_FAMILIARES, AN_DATOS_MEDICOS, AN_HISTORIA_ESCOLAR,
+		AN_ATEN_FUERA_CENTRO)
+		VALUES
+		(#{idUsuario}, #{embarazoParto}, #{desFisico},
+		#{desMotor},#{desOrofacial},#{desLenguaje},
+		#{antecedentesFamiliares},
+		#{datosMedicos},#{historialEscolar},
+		#{atenFueraCentro})
+	</insert>
+
+	<insert id='insertNinoAutonomia' parameterType='Nino'>
+		INSERT INTO
+		AUTONOMIA_NINO
+		(AN_ID_NINO, AN_TIPO_ALIMENTOS,
+		AN_ALIMENTOS_PREFERIDOS,
+		AN_RECONOCE_COMER, AN_PIDE_ALIMENTO,
+		AN_BIBERON_CHUPETE, AN_MASTICA,
+		AN_SUCCIONA_TRAGA, AN_MUERDE_COSAS,
+		AN_SALIVA, AN_HORAS_SUENO,
+		AN_INTENCION_DORMIR, AN_RECONOCE_DORMIR,
+		AN_RONCA,AN_CONTROL_ESFINTERES,
+		AN_AVISA_SUCIO, AN_PIDE_WC,
+		AN_RECONOCE_ROPA, AN_NECESIDAD_CAMBIO_ROPA,
+		AN_MALESTAR_SUCIO,AN_SONARSE_NARIZ)
+		VALUES
+		(#{idUsuario}, #{tipoAlimentos},
+		#{alimentosPreferidos},
+		#{reconoceComer},#{pideAlimento},
+		#{biberonChupete},#{mastica},
+		#{succionaTraga},#{muerdeCosas},
+		#{saliva},#{horasSueno},
+		#{intencionDormir},#{reconoceDormir},
+		#{ronca},#{controlEsfinteres},
+		#{avisaSucio},#{pideWC},
+		#{reconoceRopa},#{necesidadCambioRopa},
+		#{malestarSucio},#{sonarseNariz})
+	</insert>
+
+	<insert id='insertNinoSocializacion' parameterType='Nino'>
+		INSERT INTO
+		SOCIALIZACION_NINO
+		(SN_ID_NINO, SN_A_CARGO, SN_MAYOR_APEGO,
+		SN_SIN_ATENDER, SN_RECONOCE_FAMILIARES,
+		SN_COMPORTAMIENTO_DESCONOCIDOS, SN_JUEGO_NINOS, SN_RELACION_NINOS,
+		SN_JUEGO_FUNCIONAL, SN_IMITA_ACCIONES,
+		SN_OBJETOS_PREFERIDOS,
+		SN_RECHAZA_OBJETO, SN_JUEGA_EN_CASA, SN_RECONOCE_JUGUETE)
+		VALUES
+		(#{idUsuario}, #{aCargo},#{mayorApego},
+		#{sinAtender},#{reconoceFamiliares},
+		#{comportamientoDesconocidos},#{juegaNinos},#{relacionNinos},
+		#{juegoFunional},#{imitaAcciones},
+		#{objetosPreferidos},
+		#{rechazaObjetos},#{juegaEnCasa},#{reconoceJuguetes})
+	</insert>
+
+	<insert id='insertNinoLenguaje' parameterType='Nino'>
+		INSERT INTO
+		LENGUAJE_NINO
+		(LN_ID_NINO, LN_INTENCIONALIDAD_COMUNICATIVA,
+		LN_QUIEN_COMUNICA, LN_COMO_COMUNICA,
+		LN_LLAMA_ATENCION,
+		LN_INTENTA_ATENCION, LN_PIDE_NECESITA,
+		LN_GESTO_RECHAZO, LN_AGRADO,
+		LN_ESTADOS_EMOCION,
+		LN_GESTO_ADIOS,
+		LN_ORDENES_SENCILLAS,
+		LN_ORDENES_COMPLEJAS, LN_SE_ENTIENDE)
+		VALUES
+		(#{idUsuario},#{intencionalidadComunicativa},
+		#{quienComunica},#{comoComunica},
+		#{llamaAtencion},
+		#{intenaAtencion},#{pideNecesita},
+		#{gestoRechazo},#{agrado},
+		#{estadosEmocion},
+		#{gestoAdios},
+		#{ordenesSencillas},
+		#{ordenesComplejas},#{seEntiende})
+	</insert>
+
+	<update id='updateNino' parameterType='Nino'>
+		UPDATE NINO
+		<set>
+			<if test="usuario != null">N_USUARIO = #{usuario},</if>
+			<if test="contrasena != null">N_CONTRASENA = #{contrasena},</if>
+			N_NOMBRE = #{nombre},
+			N_APELLIDOS =#{apellidos},
+			N_IDIOMA = #{idioma},
+			N_IDIOMA_JUEGO = #{idiomaJuego},
+			N_FECHA_NACIMIENTO = #{fechaNacimiento},
+			N_TELEFONO_1 = #{telefono1},
+			N_TELEFONO_2 = #{telefono2},
+			N_NOMBRE_PADRE = #{nombrePadre},
+			N_NOMBRE_MADRE = #{nombreMadre},
+			N_PROFESION_PADRE = #{profesionPadre},
+			N_PROFESION_MADRE = #{profesionMadre},
+			N_HERMANOS_EDADES =
+			#{hermanosEdades},
+			N_OTRAS_CONVIVENCIAS = #{otrasConvivencias},
+			N_MOTIVO_CONSULTA = #{motivoConsulta},
+			N_ENTREVISTADOS =
+			#{entrevistados}			
+		</set>		
+		<where>
+			N_ID_NINO= #{idUsuario}
+		</where>
+	</update>
+
+	<update id='updateNinoAnamnesis' parameterType='Nino'>
+		UPDATE ANAMNESIS_NINO
+		<set>
+			AN_EMBARAZO_PARTO = #{embarazoParto},
+			AN_DES_FISICO = #{desFisico},
+			AN_DES_MOTOR =
+			#{desMotor},
+			AN_DES_OROFACIAL = #{desOrofacial},
+			AN_DES_LENGUAJE =
+			#{desLenguaje},
+			AN_ANTECEDENTES_FAMILIARES = #{antecedentesFamiliares},
+			AN_DATOS_MEDICOS = #{datosMedicos},
+			AN_HISTORIA_ESCOLAR =
+			#{historialEscolar},
+			AN_ATEN_FUERA_CENTRO = #{atenFueraCentro}		
+		</set>		
+		<where>
+		 AN_ID_NINO= #{idUsuario}
+		</where>
+	</update>
+
+	<update id='updateNinoAutonomia' parameterType='Nino'>
+		UPDATE AUTONOMIA_NINO
+		<set>
+			AN_TIPO_ALIMENTOS = #{tipoAlimentos},
+			AN_ALIMENTOS_PREFERIDOS = #{alimentosPreferidos},
+			AN_RECONOCE_COMER = #{reconoceComer},
+			AN_PIDE_ALIMENTO =
+			#{pideAlimento},
+			AN_BIBERON_CHUPETE = #{biberonChupete},
+			AN_MASTICA
+			=#{mastica},
+			AN_SUCCIONA_TRAGA = #{succionaTraga},
+			AN_MUERDE_COSAS =
+			#{muerdeCosas},
+			AN_SALIVA = #{saliva},
+			AN_HORAS_SUENO = #{horasSueno},
+			AN_INTENCION_DORMIR = #{intencionDormir},
+			AN_RECONOCE_DORMIR = #{reconoceDormir},
+			AN_RONCA = #{ronca},
+			AN_CONTROL_ESFINTERES = #{controlEsfinteres},
+			AN_AVISA_SUCIO =
+			#{avisaSucio},
+			AN_PIDE_WC = #{pideWC},
+			AN_RECONOCE_ROPA = #{reconoceRopa},
+			AN_NECESIDAD_CAMBIO_ROPA = #{necesidadCambioRopa},
+			AN_MALESTAR_SUCIO = #{malestarSucio},
+			AN_SONARSE_NARIZ =	#{sonarseNariz}
+		</set>		
+		<where>
+		 AN_ID_NINO= #{idUsuario}
+		</where>
+	</update>
+
+	<update id='updateNinoSocializacion' parameterType='Nino'>
+		UPDATE SOCIALIZACION_NINO
+		<set>
+			SN_A_CARGO = #{aCargo},
+			SN_MAYOR_APEGO = #{mayorApego},
+			SN_SIN_ATENDER =
+			#{sinAtender},
+			SN_RECONOCE_FAMILIARES = #{reconoceFamiliares},
+			SN_COMPORTAMIENTO_DESCONOCIDOS = #{comportamientoDesconocidos},
+			SN_JUEGO_NINOS = #{juegaNinos},
+			SN_RELACION_NINOS = #{relacionNinos},
+			SN_JUEGO_FUNCIONAL = #{juegoFunional},
+			SN_IMITA_ACCIONES =
+			#{imitaAcciones},
+			SN_OBJETOS_PREFERIDOS = #{objetosPreferidos},
+			SN_RECHAZA_OBJETO = #{rechazaObjetos},
+			SN_JUEGA_EN_CASA =
+			#{juegaEnCasa},
+			SN_RECONOCE_JUGUETE = #{reconoceJuguetes}
+		</set>		
+		<where>
+		 SN_ID_NINO= #{idUsuario}
+		</where>
+	</update>
+
+	<update id='updateNinoLenguaje' parameterType='Nino'>
+		UPDATE LENGUAJE_NINO
+		<set>
+			LN_INTENCIONALIDAD_COMUNICATIVA = #{intencionalidadComunicativa},
+			LN_QUIEN_COMUNICA = #{quienComunica},
+			LN_COMO_COMUNICA = #{comoComunica},
+			LN_LLAMA_ATENCION = #{llamaAtencion},
+			LN_INTENTA_ATENCION = #{intenaAtencion},
+			LN_PIDE_NECESITA = #{pideNecesita},
+			LN_GESTO_RECHAZO = #{gestoRechazo},
+			LN_AGRADO = #{agrado},
+			LN_ESTADOS_EMOCION = #{estadosEmocion},
+			LN_GESTO_ADIOS = #{gestoAdios},
+			LN_ORDENES_SENCILLAS = #{ordenesSencillas},
+			LN_ORDENES_COMPLEJAS = #{ordenesComplejas},
+			LN_SE_ENTIENDE = #{seEntiende}
+		</set>		
+		<where>
+		 LN_ID_NINO= #{idUsuario}
+		</where>
+	</update>
+
+	<insert id='insertSesion' parameterType='Sesion'>
+		<selectKey keyProperty="idSesion" resultType="int" order="BEFORE">
+			SELECT IFNULL(MAX(S_ID_SESION),0)+1 FROM SESION_NINO
+			<where>
+				S_ID_NINO = #{idNino}
+			</where>
+		</selectKey>
+		INSERT INTO SESION_NINO
+		(S_ID_NINO, S_ID_SESION, S_VER, S_FECHA, S_COMENTARIO)
+		VALUES
+		(#{idNino}, #{idSesion}, #{ver}, #{fecha}, #{comentario})
+	</insert>
+	
+	<update id='updateSesion' parameterType='Sesion'>
+		UPDATE SESION_NINO
+		<set>
+			S_VER = #{ver},
+			S_FECHA = #{fecha},
+			S_COMENTARIO = #{comentario}
+		</set>
+		<where>
+			S_ID_NINO = #{idNino}
+			AND S_ID_SESION = #{idSesion}
+		</where>
+	</update>
+	
+	<select id="getNombre" resultType="String" parameterType="Map">
+		SELECT N_NOMBRE 
+		FROM NINO
+		<where>
+			N_USUARIO = #{usuario}
+		</where>
+	</select>
+	
+	 <update id='cambiarContrasena' parameterType='Map'>
+	    UPDATE NINO	SET
+	     	N_CONTRASENA = #{contrasena}
+	    WHERE N_USUARIO= #{usuario}
+	</update>
+</mapper>

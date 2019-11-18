@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+	<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+	  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='bd.ibatis.mappers.FondoMapper'>
+
+	<resultMap type='Fondo' id='FondoResultset' >
+		<result property="idFondo" javaType="java.lang.Integer" column="F_ID_FONDO" />
+		<result property="nombre" javaType="java.lang.String" column="F_NOMBRE" />
+        <result property="url" javaType="java.lang.String"  column="F_IMAGEN"/>
+	</resultMap>
+
+	<select id='getFondos' resultMap='FondoResultset'>
+		SELECT F_ID_FONDO, F_NOMBRE, F_IMAGEN
+		FROM FONDO
+    </select>
+    
+    <select id='existeFondo' resultType='int' parameterType='String'>
+		SELECT COUNT(1)
+		FROM FONDO
+		<where>
+			F_NOMBRE = RTRIM(#{nombre})
+		</where>
+    </select>
+        
+    <insert id='insertFondo' parameterType='Fondo'>
+	    <selectKey keyProperty="idFondo" resultType="int" order="BEFORE">
+	    	SELECT IFNULL(MAX(F_ID_FONDO),0)+1 FROM FONDO
+	  </selectKey>
+    	INSERT INTO FONDO (F_ID_FONDO, F_NOMBRE, F_IMAGEN, F_FECMOD) 
+   		VALUES (#{idFondo}, RTRIM(#{nombre}), #{url}, SYSDATE())
+	</insert>
+</mapper>

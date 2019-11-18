@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+	<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+	  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='bd.ibatis.mappers.LogopedaMapper'>
+
+	<resultMap type='Logopeda' id='LogopedaResultset' >
+		<result property="idUsuario"   javaType="java.lang.Integer" column="L_ID_LOGOPEDA" />
+		<result property="usuario"   javaType="java.lang.String" column="L_USUARIO" />
+        <result property="nombre" javaType="java.lang.String"  column="L_NOMBRE"/>
+		<result property="apellidos"   javaType="java.lang.String" column="L_APELLIDOS"/>
+        <result property="contrasena" javaType="java.lang.String" column="L_CONTRASENA"/>
+		<result property="idioma"   javaType="java.lang.String" column="L_IDIOMA"/>
+	</resultMap>
+        
+	
+	<resultMap type='Map' id='LoginResultset'>
+	    <result property='usuario' column='L_USUARIO'/>
+	    <result property='contrasena' column='L_CONTRASENA'/>
+	</resultMap>
+
+	<select id='getLogopeda' resultMap='LogopedaResultset' parameterType='Map'>
+		SELECT L_ID_LOGOPEDA, L_USUARIO, L_NOMBRE, L_APELLIDOS, L_CONTRASENA, L_IDIOMA
+		FROM LOGOPEDA
+		<where> 
+         		L_USUARIO = #{usuario}
+         		AND L_CONTRASENA = #{contrasena}
+    	</where>
+    </select>
+    
+    <insert id='insertLogopeda' parameterType='Logopeda'>
+    	INSERT INTO LOGOPEDA (L_ID_LOGOPEDA, L_USUARIO, L_NOMBRE, L_APELLIDOS, L_CONTRASENA, L_IDIOMA) 
+   		(SELECT IFNULL(MAX(L_ID_LOGOPEDA),0)+1, #{usuario}, #{nombre}, #{apellidos}, #{contrasena},#{idioma} 
+   		FROM LOGOPEDA)
+	</insert>
+
+	<update id='updateLogopeda' parameterType='Logopeda'>
+	    UPDATE LOGOPEDA
+	    <set>
+	   		L_USUARIO= #{usuario},
+	     	L_NOMBRE= #{nombre},
+	     	L_APELLIDOS = #{apellidos},
+	     	<if test="contrasena != null">
+	     		L_CONTRASENA = #{contrasena},
+	     	</if>
+	     	L_IDIOMA = #{idioma}
+	    </set>
+	    <where>
+	        L_ID_LOGOPEDA= #{idUsuario}
+	    </where>
+	     	
+	</update>
+	
+	<select id="getNombre" resultType="String" parameterType="Map">
+		SELECT L_NOMBRE 
+		FROM LOGOPEDA
+		<where>
+			L_USUARIO = #{usuario}
+		</where>
+	</select>
+	
+	 <update id='cambiarContrasena' parameterType='Map'>
+	    UPDATE LOGOPEDA	SET
+	     	L_CONTRASENA = #{contrasena}
+	    WHERE L_USUARIO= #{usuario}
+	</update>
+</mapper>

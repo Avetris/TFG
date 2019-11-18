@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+	<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+	  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='bd.ibatis.mappers.GrupoMapper'>
+
+	<resultMap type='Grupo' id='GrupoResultset' autoMapping="true">
+		<constructor>
+			<idArg column="G_ID_GRUPO" javaType="java.lang.Integer"/>
+			<idArg column="G_NOMBRE" javaType="java.lang.String"/>	
+		</constructor>	
+		<association property="contenidoSolucion" javaType="Contenido" column="G_CONTENIDO_SOLUCION" >
+			<constructor>
+				<idArg column="G_CONTENIDO_SOLUCION" javaType="java.lang.Integer"/>	
+				<idArg column="s_NOMBRE" javaType="java.lang.String"/>	
+				<idArg column="S_CASTELLANO" javaType="java.lang.String"/>	
+				<idArg column="S_EUSKERA" javaType="java.lang.String"/>	
+				<idArg column="S_IMAGEN" javaType="java.lang.String"/>	
+			
+			</constructor>			
+		</association>	
+		<collection property="contenidoOpciones" javaType="ArrayList" ofType="Contenido" column="G_CONTENIDO_OPCION" >	
+			<constructor>
+				<idArg column="G_CONTENIDO_OPCION" javaType="java.lang.Integer"/>	
+				<idArg column="O_NOMBRE" javaType="java.lang.String"/>	
+				<idArg column="O_CASTELLANO" javaType="java.lang.String"/>	
+				<idArg column="O_EUSKERA" javaType="java.lang.String"/>	
+				<idArg column="O_IMAGEN" javaType="java.lang.String"/>			
+			</constructor>		
+		</collection>
+	</resultMap>
+	
+	<resultMap type='Grupo' id='GrupoMinijuegoResultset' autoMapping="true">
+		<constructor>
+			<idArg column="G_ID_GRUPO" javaType="java.lang.Integer"/>
+			<idArg column="G_NOMBRE" javaType="java.lang.String"/>	
+			<idArg column="G_TAMANO" javaType="java.lang.Integer"/>	
+		</constructor>
+	</resultMap>
+	
+	<resultMap type='Nino' id='PermisosGrupoResultset' autoMapping="true">
+		<constructor>
+			<idArg column="N_ID_NINO" javaType="java.lang.Integer"/>
+			<idArg column="N_NOMBRE" javaType="java.lang.String"/>	
+			<idArg column="N_APELLIDOS" javaType="java.lang.String"/>	
+		</constructor>
+	</resultMap>
+
+	<select id='getGrupos' resultMap='GrupoResultset'>
+		SELECT G_ID_GRUPO, G_NOMBRE,
+				G_CONTENIDO_SOLUCION, S.C_NOMBRE AS S_NOMBRE, S.C_CASTELLANO AS S_CASTELLANO, S.C_EUSKERA AS S_EUSKERA, S.C_IMAGEN AS S_IMAGEN,
+				G_CONTENIDO_OPCION, O.C_NOMBRE AS O_NOMBRE, O.C_CASTELLANO AS O_CASTELLANO, O.C_EUSKERA AS O_EUSKERA, O.C_IMAGEN AS O_IMAGEN		
+		FROM GRUPO 
+			INNER JOIN CONTENIDO S ON G_CONTENIDO_SOLUCION = S.C_ID_CONTENIDO
+			INNER JOIN CONTENIDO O ON G_CONTENIDO_OPCION = O.C_ID_CONTENIDO
+		ORDER BY G_ID_GRUPO ASC
+    </select>
+    
+         
+    <select id='existeGrupo' resultType='int' parameterType='String'>
+		SELECT COUNT(1)
+		FROM GRUPO
+		<where>
+			G_NOMBRE = RTRIM(#{nombre})
+		</where>
+    </select>
+    
+      <select id='esBorrableMinijuego' resultType='int' parameterType='int'>
+		SELECT COUNT(1)
+		FROM GRUPO_MINIJUEGOS
+		<where>
+			GM_ID_GRUPO = #{idGrupo}
+		</where>
+    </select>
+    
+     <select id='esBorrableUsuario' resultType='int' parameterType='int'>
+		SELECT COUNT(1)
+		FROM PERMISOS_GRUPOS
+		<where>
+			PG_ID_GRUPO = #{idGrupo}
+		</where>
+    </select>
+        
+    <insert id='insertGrupoNuevo' parameterType='Grupo'>
+	  <selectKey keyProperty="idGrupo" resultType="int" order="BEFORE">
+	    SELECT GREATEST(IFNULL(MAX(TSG_ID_GRUPO), 0), IFNULL(MAX(G_ID_GRUPO),0))+1 FROM TS_GRUPO, GRUPO
+	  </selectKey>
+    	INSERT INTO GRUPO (G_ID_GRUPO, G_NOMBRE, G_CONTENIDO_SOLUCION, G_CONTENIDO_OPCION) 
+   		VALUES 
+	   	<foreach collection="contenidoOpciones" item="contenidoOp" index="index" open="(" separator="),(" close=")">   		
+			#{idGrupo}, RTRIM(#{nombre}), #{contenidoSolucion.idContenido}, #{contenidoOp.idContenido}
+		</foreach>
+	</insert>
+	
+	<insert id='insertGrupo' parameterType='Grupo'>
+    	INSERT INTO GRUPO (G_ID_GRUPO, G_NOMBRE, G_CONTENIDO_SOLUCION, G_CONTENIDO_OPCION) 
+   		VALUES 
+	   	<foreach collection="contenidoOpciones" item="contenidoOp" index="index" open="(" separator="),(" close=")">   		
+			#{idGrupo}, RTRIM(#{nombre}), #{contenidoSolucion.idContenido}, #{contenidoOp.idContenido}
+		</foreach>
+   		ON DUPLICATE KEY UPDATE 
+   			G_NOMBRE= VALUES(G_NOMBRE), 
+   			G_CONTENIDO_SOLUCION=VALUES(G_CONTENIDO_SOLUCION), 
+   			G_CONTENIDO_OPCION=VALUES(G_CONTENIDO_OPCION)
+	</insert>
+	
+	<insert id='insertGrupoUsuarios' parameterType='Grupo'>
+    	INSERT INTO PERMISOS_GRUPOS (PG_ID_GRUPO, PG_ID_NINO) 
+   		(SELECT #{idGrupo}, N_ID_NINO FROM NINO)
+   		ON DUPLICATE KEY UPDATE 
+	   		PG_ID_GRUPO=VALUES(PG_ID_GRUPO),
+	   		PG_ID_NINO=VALUES(PG_ID_NINO)
+	</insert>
+	
+	<update id="updateGrupo" parameterType='Grupo'>
+		UPDATE GRUPO
+		<set>
+			G_CONTENIDO_SOLUCION = #{contenidoSolucion.idContenido},
+			G_CONTENIDO_OPCION = #{contenidoOpcion.idContenido}
+		</set>
+		<where>
+			G_ID_GRUPO = #{idGrupo}
+		</where>
+	</update>
+
+	<delete id='deleteGrupo' parameterType='Map'>
+	    DELETE FROM GRUPO 
+	    WHERE G_ID_GRUPO = #{idGrupo} 
+	      AND G_CONTENIDO_SOLUCION = #{solucion}
+	      AND G_CONTENIDO_OPCION = #{opcion}
+	</delete> 
+	
+	
+	<select id="getPermisos" resultMap='PermisosGrupoResultset' parameterType="Grupo">
+		SELECT N_ID_NINO, N_NOMBRE, N_APELLIDOS
+		FROM NINO, PERMISOS_GRUPOS
+		<where>
+			N_ID_NINO = PG_ID_NINO
+			AND PG_ID_GRUPO = #{idGrupo}
+		</where>
+	</select>
+	
+	<insert id="insertPermisos" parameterType='Minijuego'>
+		INSERT IGNORE INTO PERMISOS_GRUPOS
+		(PG_ID_GRUPO, PG_ID_NINO)
+		VALUES		
+	   	<foreach collection="ninos" item="nino" index="index" open="(" separator="),(" close=")">   		
+			#{idGrupo}, #{nino.idUsuario}
+		</foreach>	
+	</insert>	
+	
+	<delete id="deletePermisos" parameterType='Map'>
+		DELETE FROM PERMISOS_GRUPOS
+		<where>
+			PG_ID_GRUPO = #{idGrupo}
+			AND PG_ID_NINO= #{idNino}
+		</where> 	
+	</delete>
+</mapper>

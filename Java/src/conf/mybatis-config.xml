@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+	<!DOCTYPE configuration
+	  PUBLIC '-//mybatis.org//DTD Config 3.0//EN'
+	  'http://mybatis.org/dtd/mybatis-3-config.dtd'>
+
+<configuration>
+	<properties resource='conf/bd.properties'/>
+
+ 	<settings> 
+		<setting name="callSettersOnNulls" value="true"/> 
+	</settings> 
+	<typeAliases>
+		<typeAlias type='bd.modelo.Logopeda' alias='Logopeda' />
+		<typeAlias type='bd.modelo.Nino' alias='Nino' />
+		<typeAlias type='bd.modelo.Fondo' alias='Fondo' />
+		<typeAlias type='bd.modelo.Mapa' alias='Mapa' />
+		<typeAlias type='bd.modelo.Boton' alias='Boton' />
+		<typeAlias type='bd.modelo.Contenido' alias='Contenido' />
+		<typeAlias type='bd.modelo.Grupo' alias='Grupo'/>
+		<typeAlias type='bd.modelo.Minijuego' alias='Minijuego'/>
+		<typeAlias type='bd.modelo.Premio' alias='Premio'/>
+		<typeAlias type='bd.modelo.Sesion' alias='Sesion'/>
+		<typeAlias type='bd.modelo.HistorialMinijuegos' alias='HistorialMinijuegos'/>
+		<typeAlias type='bd.modelo.NinoPermisos' alias='NinoPermisos'/>
+ 	</typeAliases>
+ 	
+ 	<environments default='development'>
+ 		<environment id='development'>
+ 			<transactionManager type='JDBC'/>
+ 			<dataSource type='POOLED'>   
+	 			<property name='driver' value='${jdbc.driverClassName}'/>
+	 			<property name='url' value='${jdbc.url}'/>
+	 			<property name='username' value='${jdbc.username}'/>
+	 			<property name='password' value='${jdbc.password}'/>
+ 			</dataSource>
+ 		</environment>
+ 	</environments>
+ 	
+ 	<mappers>
+ 		<mapper resource='conf/mappers/Logopeda.xml'/>
+ 		<mapper resource='conf/mappers/Nino.xml'/>
+ 		<mapper resource='conf/mappers/Fondo.xml'/>
+ 		<mapper resource='conf/mappers/Mapa.xml'/>
+ 		<mapper resource='conf/mappers/Contenido.xml'/>
+ 		<mapper resource='conf/mappers/Grupo.xml'/>
+ 		<mapper resource='conf/mappers/Minijuego.xml'/>
+ 		<mapper resource='conf/mappers/Premio.xml'/>
+ 	</mappers>
+</configuration>

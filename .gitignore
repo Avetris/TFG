@@ -1,0 +1,4 @@
+Unity/Temp/*
+*.meta
+/Unity/Library/metadata/*
+*.info

@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+	<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+	  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='bd.ibatis.mappers.ContenidoMapper'>
+
+	<resultMap type='Contenido' id='ContenidoResultset' >
+		<result property="idContenido" javaType="java.lang.Integer" column="C_ID_CONTENIDO" />
+		<result property="nombre" javaType="java.lang.String" column="C_NOMBRE" />
+		<result property="castellano" javaType="java.lang.String" column="C_CASTELLANO" />
+		<result property="euskera" javaType="java.lang.String" column="C_EUSKERA" />
+		<result property="url" javaType="java.lang.String" column="C_IMAGEN" />
+	</resultMap>
+
+	<select id='getContenidos' resultMap='ContenidoResultset'>
+		SELECT C_ID_CONTENIDO, C_NOMBRE, C_CASTELLANO, C_EUSKERA, C_IMAGEN
+		FROM CONTENIDO
+    </select>
+         
+    <select id='existeContenido' resultType='int' parameterType='String'>
+		SELECT COUNT(1)
+		FROM CONTENIDO
+		<where>
+			C_NOMBRE = RTRIM(#{nombre})
+		</where>
+    </select>
+        
+    <insert id='insertContenido' parameterType='Contenido'>
+	  <selectKey keyProperty="idContenido" resultType="int" order="BEFORE">
+	    SELECT IFNULL(MAX(TSC_ID_CONTENIDO),0)+1 FROM TS_CONTENIDO
+	  </selectKey>
+    	INSERT INTO CONTENIDO (C_ID_CONTENIDO, C_NOMBRE, C_CASTELLANO, C_EUSKERA, C_IMAGEN) 
+   		VALUES (#{idContenido}, RTRIM(#{nombre}), #{castellano}, #{euskera}, #{url})
+	</insert>
+	
+	<update id="updateContenido" parameterType='Contenido'>
+		UPDATE CONTENIDO
+		<set>
+			C_CASTELLANO = #{castellano},
+			C_EUSKERA = #{euskera}
+			<if test="url != null">,C_IMAGEN = #{url}</if> 
+		</set>
+		<where>
+			C_ID_CONTENIDO = #{idContenido}
+		</where>
+	</update>
+
+	<delete id='deleteContenido' parameterType='int'>
+	    DELETE FROM CONTENIDO WHERE C_ID_CONTENIDO = #{idContenido}
+	</delete> 
+</mapper>

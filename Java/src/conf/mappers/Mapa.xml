@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+	<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+	  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='bd.ibatis.mappers.MapaMapper'>
+
+	<resultMap type="Mapa" id="MapaResultset">
+		<constructor>
+			<idArg column="MA_ID_MAPA" javaType="java.lang.Integer"/>
+			<idArg column="MA_NOMBRE" javaType="java.lang.String"/>
+			<idArg column="MA_IMAGEN" javaType="java.lang.String"/>
+		</constructor>
+		<collection property="botones" javaType="ArrayList" ofType="Boton" column="MA_ID_MAPA">
+			<constructor>
+				<idArg column="BM_ID_MAPA" javaType="java.lang.Integer"/>
+				<idArg column="BM_ID_BOTON" javaType="java.lang.Integer"/>
+		        <idArg column="BM_POSICION_X" javaType="java.lang.Float"/>
+		        <idArg column="BM_POSICION_Y" javaType="java.lang.Float"/>
+		        <idArg column="BM_WIDTH" javaType="java.lang.Float"/>
+		        <idArg column="BM_HEIGHT" javaType="java.lang.Float"/>				
+			</constructor>
+		</collection>
+	</resultMap>
+	
+	<select id='getMapas' resultMap='MapaResultset'>
+		SELECT MA_ID_MAPA, MA_NOMBRE, MA_IMAGEN, BM_ID_MAPA, BM_ID_BOTON, BM_POSICION_X, BM_POSICION_Y, BM_WIDTH, BM_HEIGHT
+		FROM MAPA
+			INNER JOIN BOTONES_MAPA ON BM_ID_MAPA = MA_ID_MAPA
+    </select>
+    
+    <select id='existeMapa' resultType='int' parameterType='String'>
+		SELECT COUNT(1)
+		FROM MAPA
+		<where>
+			MA_NOMBRE = RTRIM(#{nombre})
+		</where>
+    </select>
+	
+	 <insert id='insertMapa' parameterType='Mapa' useGeneratedKeys="true" keyProperty="idMapa" keyColumn="MA_ID_MAPA">    	
+	    <selectKey keyProperty="idMapa" resultType="int" order="BEFORE">
+	    	SELECT IFNULL(MAX(MA_ID_MAPA),0)+1 FROM MAPA
+	  	</selectKey>
+    	INSERT INTO MAPA (MA_ID_MAPA, MA_NOMBRE, MA_IMAGEN, MA_FECMOD) 
+   		VALUES(#{idMapa}, RTRIM(#{nombre}), #{url}, SYSDATE());
+	</insert>
+	
+	 <insert id='insertBoton' parameterType='Boton'>    	
+	    <selectKey keyProperty="idBoton" resultType="int" order="BEFORE">
+	    	SELECT IFNULL(MAX(TSBM_ID_BOTON),0)+1 FROM TS_BOTONES_MAPA
+	    	WHERE TSBM_ID_MAPA = #{idMapa}
+	  	</selectKey>
+    	INSERT INTO BOTONES_MAPA (BM_ID_MAPA, BM_ID_BOTON, BM_POSICION_X, BM_POSICION_Y, BM_WIDTH, BM_HEIGHT) 
+   		VALUES(#{idMapa}, #{idBoton}, #{posicionX}, #{posicionY}, #{width}, #{height});
+	</insert>
+	
+	<update id='updateBoton' parameterType='Boton'>
+	    UPDATE BOTONES_MAPA
+	    <set>
+	     	BM_POSICION_X= #{posicionX},
+	     	BM_POSICION_Y= #{posicionY},
+	     	BM_WIDTH= #{width},	
+	     	BM_HEIGHT= #{height}		    	
+	    </set>
+	    <where>
+	      BM_ID_MAPA= #{idMapa} 
+	     AND BM_ID_BOTON = #{idBoton}
+	    </where>	
+	</update>
+
+	<delete id='deleteBoton' parameterType='Boton'>
+	    DELETE FROM BOTONES_MAPA 
+	    WHERE BM_ID_MAPA = #{idMapa} 
+	      and BM_ID_BOTON = #{idBoton}
+	</delete> 
+</mapper>

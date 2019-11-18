@@ -1,0 +1,20 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\GestorBD.cs">
+    <Files>
+      <File FileName="Assets\Script\Parejas.cs" Line="21" Column="17" />
+      <File FileName="Assets\Script\Opciones.cs" Line="23" Column="47" />
+      <File FileName="Assets\Script\Minijuego.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\FormarPalabras.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\SopaDeLetras.cs" Line="40" Column="67" />
+      <File FileName="Assets\Script\UnionTriple.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\RodearConLetra.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\LaberintoErroneo.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\GestorBD.cs" Line="4" Column="7" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

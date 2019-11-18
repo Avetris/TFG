@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+	<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+	  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='bd.ibatis.mappers.PremioMapper'>
+
+	<resultMap type='Premio' id='PremioResultset' >
+		<result property="idPremio" javaType="java.lang.Integer" column="PR_ID_PREMIO" />
+		<result property="nombre" javaType="java.lang.String" column="PR_NOMBRE" />
+        <result property="url" javaType="java.lang.String"  column="PR_IMAGEN"/>
+	</resultMap>
+
+	<select id='getPremios' resultMap='PremioResultset'>
+		SELECT PR_ID_PREMIO, PR_NOMBRE, PR_IMAGEN
+		FROM PREMIO
+    </select>
+    
+    <select id='existePremio' resultType='int' parameterType='String'>
+		SELECT COUNT(1)
+		FROM PREMIO
+		<where>
+			PR_NOMBRE = RTRIM(#{nombre})
+		</where>
+    </select>
+        
+    <insert id='insertPremio' parameterType='Premio'>
+	    <selectKey keyProperty="idPremio" resultType="int" order="BEFORE">
+	    	SELECT IFNULL(MAX(PR_ID_PREMIO),0)+1 FROM PREMIO
+	  </selectKey>
+    	INSERT INTO PREMIO (PR_ID_PREMIO, PR_NOMBRE, PR_IMAGEN) 
+   		VALUES (#{idPremio}, RTRIM(#{nombre}), #{url})
+	</insert>
+</mapper>
